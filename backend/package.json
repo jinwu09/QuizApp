@@ -1,40 +1,51 @@
 {
-  "name": "chumpy",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "rest api for mobile frontend",
-  "main": "index.js",
+  "description": "",
+  "main": "app.ts",
   "scripts": {
+    "testasd": "echo \"Error: no test specified\" && exit 1",
     "test": "cls && jest --runInBand",
-    "inittemp": "(npx prisma db push --force-reset && npx prisma generate) ",
-    "init": "(npx prisma db push --force-reset && npx prisma generate) && npx ts-node src/factory/index.ts",
-    "dev": "set DEBUG=express:router & nodemon src/main.ts ",
+    "init": "(npx prisma db push --force-reset && npx prisma generate) && npx ts-node src/init.ts",
+    "dev": "nodemon app.ts",
     "build": "tsc",
-    "buildpm2": "tsc && npx pm2 start src/main.js && npx pm2 monit"
+    "buildpm2": "tsc && npx pm2 start app.js && npx pm2 monit"
   },
-  "author": "Albert John Santos",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^8.0.2",
+    "@faker-js/faker": "^7.6.0",
     "@types/express": "^4.17.17",
-    "@types/node": "^20.4.2",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.1.6"
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.13.0",
+    "@types/sinon": "^10.0.13",
+    "@types/supertest": "^2.0.12",
+    "nodemon": "^2.0.20",
+    "pm2": "^5.3.0",
+    "prisma": "^4.10.1",
+    "sinon": "^15.0.3",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@prisma/client": "^5.0.0",
-    "@types/bcrypt": "^5.0.0",
-    "@types/cors": "^2.8.13",
-    "@types/jsonwebtoken": "^9.0.2",
+    "@prisma/client": "^4.10.1",
+    "@types/jsonwebtoken": "^9.0.1",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
-    "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.29.3",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-validator": "^6.15.0",
     "express-winston": "^4.2.0",
-    "jsonwebtoken": "^9.0.1",
-    "winston": "^3.10.0",
-    "zod": "^3.21.4"
+    "jsonwebtoken": "^9.0.0",
+    "socket.io": "^4.6.1",
+    "winston": "^3.8.2"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7",
+    "utf-8-validate": "^5.0.10"
   }
 }

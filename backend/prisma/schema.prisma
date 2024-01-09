@@ -10,22 +10,128 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  CUSTOMER
-  BUSINESS_OWNER
+enum QuizType {
+  PRIVATE
+  PUBLIC
 }
 
-enum OrderStatus {
-  PREPARING
-  PENDING
-  DELIVERED
-  REFUND
+enum StatusType {
+  OPEN
+  ONGOING
+  DONE
+  CLOSED
 }
 
-model Accounts {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String
-  role     Role   @default(CUSTOMER)
+model User {
+  id         Int         @id @default(autoincrement())
+  first_name String
+  last_name  String
+  school     String?
+  email      String      @unique
+  password   String
+  username String?
+  Answer     Answer[]
+  Quiz       Quiz[]
+  attendees  Attendees[]
+  Token      Token[]
+  // answeredQuiz AnsweredQuiz[]
+}
+
+model Token {
+  id      Int    @id @default(autoincrement())
+  Users   User   @relation(fields: [usersId], references: [id], onDelete: Cascade)
+  usersId Int
+  token   String @unique @default(uuid())
+}
+
+model Answer {
+  id            Int          @id @default(autoincrement())
+  Quiz          Quiz?        @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId        Int?
+  Question      Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId    Int
+  choice        Choice       @relation(fields: [choiceId], references: [id], onDelete: Cascade)
+  choiceId      Int
+  Users         User?        @relation(fields: [usersId], references: [id], onDelete: Cascade)
+  usersId       Int?
+  answered_at   DateTime     @default(now())
+  // AnsweredQuiz   AnsweredQuiz? @relation(fields: [answeredQuizId], references: [id])
+  // answeredQuizId String?
+  QuizSession   QuizSession? @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
+  quizSessionId Int?
+}
+
+model Quiz {
+  id         Int        @id @default(autoincrement())
+  title      String
+  password   String?
+  room       Room[]
+  status     QuizType   @default(PUBLIC)
+  condition  StatusType @default(OPEN)
+  creator    User       @relation(fields: [creator_id], references: [id], onDelete: Cascade)
+  creator_id Int
+  created_at DateTime   @default(now())
+  question   Question[]
+  answer     Answer[]
+  description String @db.Text
+  image_path String? @db.Text
+  // totalScore AnsweredQuiz[]
+}
+
+model Room {
+  id          Int           @id @default(autoincrement())
+  Quiz        Quiz?         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId      Int?          @unique
+  room        String        @unique
+  attendees   Attendees[]
+  quizSession QuizSession[]
+}
+
+model Attendees {
+  id     Int   @id @default(autoincrement())
+  Room   Room? @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId Int?
+  User   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?  @unique
+}
+
+model QuizSession {
+  id         Int       @id @default(autoincrement())
+  Question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId Int?
+  Room       Room      @relation(fields: [roomName], references: [room], onDelete: Cascade)
+  roomName   String
+  isActive   Boolean
+  answer     Answer[]
+}
+
+// model AnsweredQuiz {
+//   id         String   @id @default(uuid())
+//   Score      Int
+//   created_at DateTime @default(now())
+//   Quiz       Quiz?    @relation(fields: [quizId], references: [id])
+//   quizId     String?
+//   answer     Answer[]
+//   Users      Users?   @relation(fields: [usersId], references: [id])
+//   usersId    String?
+// }
+
+model Question {
+  id          Int           @id @default(autoincrement())
+  content     String
+  score       Int
+  choice      Choice[]
+  answer      Answer[]
+  quizSession QuizSession[]
+  Quiz        Quiz          @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId      Int
+}
+
+model Choice {
+  id         Int       @id @default(autoincrement())
+  content    String
+  is_correct Boolean
+  answer     Answer[]
+  Question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId Int
 }
