@@ -55,7 +55,7 @@ function joinLobbyAsJoiner(room: any) {
     <div class="container justify-center flex flex-col gap-4">
       <div class="flex flex-row justify-center gap-5">
         <div class="card w-96 bg-base-100 shadow-xl">
-          <div class="card-body">
+          <form class="card-body" @submit.prevent="joinLobbyAsJoiner(JoinRoom)">
             <h2 class="card-title">have a room in mind</h2>
             <label class="form-control w-full max-w-xs">
               <div class="label">
@@ -65,12 +65,15 @@ function joinLobbyAsJoiner(room: any) {
                 type="text"
                 placeholder="Type here"
                 class="input input-bordered w-full max-w-xs"
+                v-model="JoinRoom"
               />
             </label>
             <div class="card-actions justify-end">
-              <button class="btn btn-primary">JOIN</button>
+              <button class="btn btn-primary" type="submit" @click="joinLobbyAsJoiner(JoinRoom)">
+                JOIN
+              </button>
             </div>
-          </div>
+          </form>
         </div>
 
         <div class="card w-96 bg-base-100 shadow-xl">
