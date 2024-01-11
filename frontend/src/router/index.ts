@@ -40,11 +40,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'LandingPage',
-      component: LoginView
-    },
-    {
-      path: '/langing_page',
-      name: 'landingpage'
+      component: LandingPage
     },
     //Authentication
     {
