@@ -40,7 +40,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'LandingPage',
-      component: LandingPage
+      component: LoginView
     },
     {
       path: '/langing_page',
@@ -178,22 +178,22 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   const store = useAuthStore()
+router.beforeEach((to, from, next) => {
+  const store = useAuthStore()
 
-//   if (
-//     to.name !== 'login' &&
-//     to.name !== 'register' &&
-//     to.name !== 'LandingPage' &&
-//     !store.isAuthenticated
-//   ) {
-//     next({ name: 'login' })
-//   } else if (
-//     store.isAuthenticated &&
-//     (to.name === 'login' || to.name === 'register' || to.name === 'LandingPage')
-//   ) {
-//     next({ name: 'dashboard' })
-//   } else next()
-// })
+  if (
+    to.name !== 'login' &&
+    to.name !== 'register' &&
+    to.name !== 'LandingPage' &&
+    !store.isAuthenticated
+  ) {
+    next({ name: 'login' })
+  } else if (
+    store.isAuthenticated &&
+    (to.name === 'login' || to.name === 'register' || to.name === 'LandingPage')
+  ) {
+    next({ name: 'dashboard' })
+  } else next()
+})
 
 export default router
