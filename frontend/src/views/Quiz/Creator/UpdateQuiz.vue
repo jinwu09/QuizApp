@@ -28,7 +28,7 @@ function updateQuiz() {
     timer: 0,
     showCancelButton: true,
     showConfirmButton: true,
-    confirmButtonText: 'Yes, update it!',
+    confirmButtonText: 'Yes, update it!'
   }).then((result) => {
     if (result.isConfirmed) {
       axios
@@ -72,7 +72,7 @@ function deleteQuiz() {
     icon: 'warning',
     showCancelButton: true,
     showConfirmButton: true,
-    timer:0,
+    timer: 0,
     confirmButtonColor: '#8a2f2f',
     cancelButtonColor: '#3085d6',
     confirmButtonText: 'Yes, delete it!'
@@ -167,182 +167,107 @@ onMounted(() => {
 
 <template>
   <NavBar />
-  <div class="mt-2">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="row p-3 border rounded-3 border-dark">
-                <div class="col-md-12">
-                  <form @submit.prevent="updateQuiz">
-                    <div class="mb-3">
-                      <label class="form-label">Title</label>
-                      <input type="text" v-model="title" class="form-control" autocomplete="off" />
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Room Number</label>
-                      <input
-                        type="text"
-                        v-model="room_passcode"
-                        class="form-control"
-                        autocomplete="off"
-                      />
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Description</label>
-                      <textarea
-                        v-model="description"
-                        class="form-control"
-                        autocomplete="off"
-                      ></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Image</label>
-                      <input
-                        v-model="image_path"
-                        class="form-control"
-                        autocomplete="off"
-                      />
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Room Status</label>
-                      <select
-                        class="form-select"
-                        aria-label=".form-select-lg example"
-                        v-model="status"
-                      >
-                        <option selected value="PUBLIC">Public</option>
-                        <option value="PRIVATE">Private</option>
-                      </select>
-                    </div>
-
-                    <div class="mb-3">
-                      <label class="form-label">Room Password</label>
-                      <input
-                        type="password"
-                        v-model="password"
-                        class="form-control"
-                        autocomplete="off"
-                        :disabled="status == 'PUBLIC'"
-                        :required="status == 'PRIVATE'"
-                      />
-                    </div>
-
-                    <div class="mb-3">
-                      <div class="row gx-2">
-                        <div class="col">
-                          <div class="d-grid gap-2">
-                            <button class="btn button-update" type="submit">Update Quiz</button>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <div class="d-grid gap-2">
-                            <button class="btn button-delete" type="button" @click="deleteQuiz">
-                              Delete Quiz
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row mt-2">
-                        <div class="d-grid gap-2">
-                          <button class="btn button-lobby" type="button" @click="GoToLobby()">
-                            Go to Lobby
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+  <div class="flex justify-center">
+    <div class="flex flex-col gap-2 container justify-center">
+      <form class="card w-full bg-base-100 shadow-xl" @submit.prevent="createQuiz">
+        <div class="card-body">
+          <h2 class="card-title">Create You Quiz:</h2>
+          <!-- input start here -->
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Title</span>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-7">
-              <!-- Questions here -->
-              <div
-                :class="index == 0 ? 'row' : 'row pt-3'"
-                v-for="(value, index) in questions"
-                :key="value.id"
+            <input
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs"
+              v-model="title"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Room Number</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs"
+              v-model="room_passcode"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <div class="">
+            <div class="">
+              <label class="">Room Status <span class=""></span></label>
+              <select
+                class="form-select"
+                aria-label=".form-select-lg example"
+                v-model="status"
+                required
               >
-                <QuestionBox
-                  :question_id="value.id"
-                  :points="value.score"
-                  :question_content="value.content"
-                  :choice_a="value.choice[0].content"
-                  :choice_a_is-correct="value.choice[0].is_correct"
-                  :choice_b="value.choice[1].content"
-                  :choice_b_is-correct="value.choice[1].is_correct"
-                  :choice_c="value.choice[2].content"
-                  :choice_c_is-correct="value.choice[2].is_correct"
-                  :choice_d="value.choice[3].content"
-                  :choice_d_is-correct="value.choice[3].is_correct"
-                  @delete="deleteQuestion"
-                  @update="updateQuestion"
-                />
-              </div>
-
-              <div class="row py-3">
-                <div class="container-fluid add-new-background p-3" @click="addNewQuestion">
-                  <p class="h5 text-center">Add New Question</p>
-                </div>
-              </div>
+                <option value="PUBLIC">Public</option>
+                <option value="PRIVATE">Private</option>
+              </select>
             </div>
           </div>
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Room Password</span>
+            </div>
+            <input
+              type="text"
+              v-model="password"
+              placeholder="Type here"
+              autocomplete="off"
+              class="input input-bordered w-full max-w-xs"
+              :disabled="status == 'PUBLIC' || status == ''"
+              :required="status == 'PRIVATE'"
+            />
+          </label>
+          <div class="mb-3">
+            <label class="form-label">Description <span class="text-muted"></span></label>
+            <textarea
+              type="text"
+              v-model="description"
+              class="form-control w-full"
+              autocomplete="off"
+              required
+            ></textarea>
+          </div>
+          <!-- input stop here -->
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" type="submit">Update Quiz</button>
+            <button class="btn btn-secondary" type="button" @click="deleteQuiz">Delete Quiz</button>
+            <button class="btn btn-neutral" type="button" @click="GoToLobby()">Go to Lobby</button>
+          </div>
         </div>
-        <div class="col-md-1"></div>
+      </form>
+      <!-- end of forms -->
+      <div
+        :class="index == 0 ? 'row' : 'row pt-3'"
+        v-for="(value, index) in questions"
+        :key="value.id"
+      >
+        <QuestionBox
+          :question_id="value.id"
+          :points="value.score"
+          :question_content="value.content"
+          :choice_a="value.choice[0].content"
+          :choice_a_is-correct="value.choice[0].is_correct"
+          :choice_b="value.choice[1].content"
+          :choice_b_is-correct="value.choice[1].is_correct"
+          :choice_c="value.choice[2].content"
+          :choice_c_is-correct="value.choice[2].is_correct"
+          :choice_d="value.choice[3].content"
+          :choice_d_is-correct="value.choice[3].is_correct"
+          @delete="deleteQuestion"
+          @update="updateQuestion"
+        />
       </div>
+      <button class="btn btn-primary" @click="addNewQuestion">Add New Question</button>
     </div>
   </div>
 </template>
-
-<style scoped>
-.add-new-background {
-  background: var(--main-color);
-  color: #fff;
-}
-
-.add-new-background:hover {
-  background: var(--hover-color);
-  cursor: pointer;
-}
-
-.button-update {
-  background: #5d6a59;
-  color: #fff;
-}
-
-.button-update:hover {
-  background: #2c3629;
-  color: #fff;
-}
-
-.button-delete {
-  background: #bb4545;
-  color: #fff;
-}
-
-.button-delete:hover {
-  background: #8a2f2f;
-  color: #fff;
-}
-
-.button-lobby {
-  background: var(--main-color);
-  color: #fff;
-}
-
-.button-lobby:hover {
-  background: var(--hover-color);
-  color: #fff;
-}
-
-.quiz {
-  background: #f0f0f0;
-}
-
-.form-control,
-.form-select {
-  border: 1px solid black;
-}
-</style>

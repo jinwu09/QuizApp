@@ -57,130 +57,86 @@ function createQuiz() {
 
 <template>
   <NavBar />
-  <div class="mt-2">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <div class="row">
-            <div class="col-md-12 d-flex align-items-center justify-content-center customHeight">
-              <div class="row p-3 border rounded-3 border-dark">
-                <div class="col-md-12">
-                  <form @submit.prevent="createQuiz">
 
-                    <div class="mb-3">
-                      <h1>Create your Quiz:</h1>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Title <span class="text-muted"></span></label>
-                      <input type="text" v-model="title" class="form-control" autocomplete="off" required />
-                    </div>
-                    <div class="row">
-
-                      <div class="col-md-4">
-                        <div class="mb-3">
-                          <label class="form-label">Room Number
-                            <span class="text-muted"></span></label>
-                          <input type="text" v-model="room_passcode" class="form-control" autocomplete="off" required />
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="mb-3">
-                          <label class="form-label">Room Status
-                            <span class="text-muted"></span></label>
-                          <select class="form-select" aria-label=".form-select-lg example" v-model="status" required>
-                            <option value="PUBLIC">Public</option>
-                            <option value="PRIVATE">Private</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="mb-3">
-                          <label class="form-label">Room Password
-                            <span class="text-muted"></span></label>
-                          <input type="password" v-model="password" class="form-control" autocomplete="off"
-                            :disabled="status == 'PUBLIC' || status == ''" :required="status == 'PRIVATE'" />
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="mb-3">
-                      <label class="form-label">Description
-                        <span class="text-muted"></span></label>
-                      <textarea type="text" v-model="description" class="form-control" autocomplete="off"
-                        required></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Image
-                        <span class="text-muted">(Copy an image address from the internet)</span></label>
-                      <input type="text" v-model="image_path" class="form-control" autocomplete="off" required />
-                    </div>
-
-
-
-
-                    <div class="mb-3">
-                      <div class="container-fluid">
-                        <div class="row gx-2">
-                          <div class="col">
-                            <div class="d-grid gap-2">
-                              <button class="btn button-update add-new-background" type="submit">Create Quiz</button>
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="d-grid gap-2">
-                              <button class="btn button-delete" type="button" @click="router.push({ name: 'dashboard' })">
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
+  <div class="flex justify-center">
+    <div class="flex container justify-center">
+      <form class="card w-full bg-base-100 shadow-xl" @submit.prevent="createQuiz">
+        <div class="card-body">
+          <h2 class="card-title">Create You Quiz:</h2>
+          <!-- input start here -->
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Title</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs"
+              v-model="title"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Room Number</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs"
+              v-model="room_passcode"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <div class="">
+            <div class="">
+              <label class="">Room Status <span class=""></span></label>
+              <select
+                class="form-select"
+                aria-label=".form-select-lg example"
+                v-model="status"
+                required
+              >
+                <option value="PUBLIC">Public</option>
+                <option value="PRIVATE">Private</option>
+              </select>
             </div>
           </div>
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">Room Password</span>
+            </div>
+            <input
+              type="text"
+              v-model="password"
+              placeholder="Type here"
+              autocomplete="off"
+              class="input input-bordered w-full max-w-xs"
+              :disabled="status == 'PUBLIC' || status == ''"
+              :required="status == 'PRIVATE'"
+            />
+          </label>
+          <div class="mb-3">
+            <label class="form-label">Description <span class="text-muted"></span></label>
+            <textarea
+              type="text"
+              v-model="description"
+              class="form-control w-full"
+              autocomplete="off"
+              required
+            ></textarea>
+          </div>
+          <!-- input stop here -->
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" @click="router.push({ name: 'dashboard' })">
+              Cancel
+            </button>
+            <button class="btn btn-primary" type="submit">Create Quiz</button>
+          </div>
         </div>
-        <div class="col-md-1"></div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
-
-<style scoped>
-.add-new-background {
-  background: var(--main-color);
-  color: #fff;
-}
-
-.add-new-background:hover {
-  background: var(--hover-color);
-  cursor: pointer;
-}
-
-.button-update {
-  background: #5d6a59;
-  color: #fff;
-}
-
-.button-delete {
-  background: #bb4545;
-  color: #fff;
-}
-
-.quiz {
-  background: #f0f0f0;
-}
-
-.form-control,
-.form-select {
-  border: 1px solid black;
-}
-
-.customHeight {
-  height: 80vh;
-}
-</style>

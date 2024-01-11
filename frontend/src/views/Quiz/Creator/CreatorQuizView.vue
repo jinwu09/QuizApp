@@ -67,39 +67,47 @@ onBeforeUnmount(() => {
     <div class="d-flex align-items-center justify-content-center box">
       <div class="row w-100">
         <div class="col-md-12">
-          <div class="row d-flex justify-content-between">
-            <button class="col-2 q-button" @click="PreviousQuestion()" :disabled="FirstQuestion">
+          <div class="flex justify-between mx-5">
+            <button class="btn btn-primary" @click="PreviousQuestion()" :disabled="FirstQuestion">
               Previous
             </button>
             <button
-              class="col-2 q-button"
+              class="btn btn-primary"
               @click="nextQuestion()"
               :disabled="LastQuestion"
               v-if="LastQuestion == false"
             >
               Next
             </button>
-            <button class="col-2 q-button" @click="DoneSession()" v-if="LastQuestion == true">
+            <button class="btn btn-primary" @click="DoneSession()" v-if="LastQuestion == true">
               Done
             </button>
           </div>
-          <div class="row question-area mt-2" id="qa">
+          <div class="row question-area mt-2 bg-base-300">
             <h3 class="h3" id="text">
               {{ question.content }}
             </h3>
           </div>
-          <div class="row d-flex justify-content-between mt-2">
-            <div class="col-md-6 a-button" id="a">
-              {{ question.choice[0].content }}
+          <div class="flex flex-col text-center gap-3 mt-5">
+            <div class="card w-full bg-base-300 shadow-xl">
+              <div class="card-body">
+                {{ question.choice[0].content }}
+              </div>
             </div>
-            <div class="col-md-6 a-button" id="b">
-              {{ question.choice[1].content }}
+            <div class="card w-full bg-base-300 shadow-xl">
+              <div class="card-body">
+                {{ question.choice[1].content }}
+              </div>
             </div>
-            <div class="col-md-6 a-button" id="c">
-              {{ question.choice[2].content }}
+            <div class="card w-full bg-base-300 shadow-xl">
+              <div class="card-body">
+                {{ question.choice[2].content }}
+              </div>
             </div>
-            <div class="col-md-6 a-button" id="d">
-              {{ question.choice[3].content }}
+            <div class="card w-full bg-base-300 shadow-xl">
+              <div class="card-body">
+                {{ question.choice[3].content }}
+              </div>
             </div>
           </div>
         </div>
@@ -114,7 +122,6 @@ onBeforeUnmount(() => {
 }
 
 .question-area {
-  background-color: #d9d9d9;
   min-height: 30vh;
   padding: 20px;
   word-wrap: break-word;
@@ -138,22 +145,5 @@ onBeforeUnmount(() => {
   min-height: 90px;
   word-wrap: break-word;
   padding: 16px;
-}
-
-#a {
-  color: #fff;
-  background-color: #7e549e;
-}
-#b {
-  color: #fff;
-  background-color: #c2549d;
-}
-#c {
-  color: #fff;
-  background-color: #fc8370;
-}
-#d {
-  color: #fff;
-  background-color: #fecb3e;
 }
 </style>

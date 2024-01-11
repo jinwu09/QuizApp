@@ -12,27 +12,20 @@ function navToLogin() {
     class="container-fluid page-background d-flex justify-content-center align-items-center align-contents-center pt-4"
   >
     <div class="row align-items-center mt-5 pt-5">
-      <div class="background-animation skew1">
-        <div class="moving-div-1"></div>
-        <div class="moving-div-1"></div>
-      </div>
-      <div class="background-animation skew2">
-        <div class="moving-div-2"></div>
-        <div class="moving-div-2"></div>
-      </div>
-      <div class="col-lg-6">
+      <div class="">
         <div class="row text text-center d-flex justify-content-center align-items-center">
           <span class="display-5 title">
             <span style="--i: 1">Q</span>
             <span style="--i: 2">u</span>
             <span style="--i: 3">i</span>
-            <span style="--i: 4">g</span>
-            <span style="--i: 5">e</span>
-            <span style="--i: 6">r</span>
+            <span style="--i: 4">z</span>
+            <span style="--i: 5">A</span>
+            <span style="--i: 6">p</span>
+            <span style="--i: 7">p</span>
           </span>
         </div>
         <div class="row text-center justify-content-center tag">
-          A Real-time Interactive Quiz Game
+          A Real-time Interactive Quiz Creaaation
         </div>
         <div class="row text text-center mt-5">
           <div class="input-group mb-3">
@@ -43,8 +36,8 @@ function navToLogin() {
               aria-label="Quiz Code"
               aria-describedby="Quiz Code"
             />
-            <div class="input-group-append">
-              <button class="submit hvr-glow" type="button" @click="navToLogin">Enter</button>
+            <div class="">
+              <button class="submit hvr-glow ml-10" type="button" @click="navToLogin">Enter</button>
             </div>
           </div>
           <!-- <input class="text input" placeholder="Quiz Code" />
@@ -58,23 +51,11 @@ function navToLogin() {
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
-        <div class="text-center">
-          <div class="text-center">
-            <img
-              src="/src/assets/pic.png"
-              class="img-fluid LandPagePic hvr-bounce-in"
-              alt="resposive image"
-            />
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
 .title {
   font-family: var(--title-font);
   color: var(--main-color);
@@ -88,10 +69,7 @@ function navToLogin() {
 }
 .title:hover {
   color: #fff;
-  text-shadow: 0 0 5px #B27CC5,
-              0 0 25px #B27CC5,
-              0 0 50px #B27CC5,
-              0 0 100px #B27CC5;
+  text-shadow: 0 0 5px #b27cc5, 0 0 25px #b27cc5, 0 0 50px #b27cc5, 0 0 100px #b27cc5;
 }
 .page-background {
   background-color: #f2edeb;

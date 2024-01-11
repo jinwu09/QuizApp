@@ -60,85 +60,45 @@ onBeforeUnmount(() => {
 <template>
   <main>
     <div v-if="!has_submitted">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col box box-1" @click="submit(Choies[0].id)">
-                <span>
-                  <p class="text">{{ Choies[0].content }}</p>
-                  <!-- <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-airplane-fill icon"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"
-                    />
-                  </svg> -->
-                </span>
-              </div>
-              <div class="col box box-2" @click="submit(Choies[1].id)">
-                <span>
-                  <p class="text">{{ Choies[1].content }}</p>
-                  <!-- <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-bag-fill icon"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"
-                    />
-                  </svg> -->
-                </span>
+      <div class="flex justify-center">
+        <div class="container flex flex-col gap-4">
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{{ Choies[0].content }}</h2>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary" @click="submit(Choies[0].id)">Answer</button>
               </div>
             </div>
-            <div class="row">
-              <div class="col box box-3" @click="submit(Choies[2].id)">
-                <span>
-                  <p class="text">{{ Choies[2].content }}</p>
-
-                  <!-- <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-cart-fill icon"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-                    />
-                  </svg> -->
-                </span>
+          </div>
+          <!--  -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{{ Choies[1].content }}</h2>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary" @click="submit(Choies[1].id)">Answer</button>
               </div>
-              <div class="col box box-4" @click="submit(Choies[3].id)">
-                <span>
-                  <p class="text">{{ Choies[3].content }}</p>
-
-                  <!-- <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-nut-fill icon"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1H4.58zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196z"
-                    />
-                  </svg> -->
-                </span>
+            </div>
+          </div>
+          <!--  -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{{ Choies[2].content }}</h2>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary" @click="submit(Choies[2].id)">Answer</button>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">{{ Choies[3].content }}</h2>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary" @click="submit(Choies[3].id)">Answer</button>
               </div>
             </div>
           </div>
         </div>
+        <!--  -->
       </div>
     </div>
     <div v-else>

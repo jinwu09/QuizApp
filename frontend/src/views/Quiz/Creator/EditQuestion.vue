@@ -124,118 +124,122 @@ onMounted(() => {
 
 <template>
   <NavBar />
-  <div class="container-fluid d-flex">
-    <!-- first main column -->
-    <div class="col-1"></div>
+  <div class="container-fluid flex flex-col gap-3">
+    <div class="card w-full bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div class="flex justify-between">
+          <select
+            class="form-select hvr-grow-rotate"
+            aria-label="Default select example"
+            v-model="score"
+          >
+            <option disabled value="" class="hvr-grow-rotate" selected>Select Quiz Points</option>
+            <option>0</option>
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+          <div>
+            <!--  -->
+            <button
+              class="btn btn-neutral"
+              @click="
+                router.push({ name: 'update-quiz', params: { quiz_id: route.params.quiz_id } })
+              "
+            >
+              Cancel
+            </button>
+            <button class="btn btn-primary" @click="updateQuiz">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card w-full bg-base-100 shadow-xl">
+      <div class="card-body">
+        <textarea
+          v-model="content"
+          oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+          class="w-full bg-base-200 align-center text-center border-none bigTextbox w-100 px-3 py-5"
+          placeholder="Insert your Question here"
+        ></textarea>
+      </div>
+    </div>
 
     <!-- second main column -->
     <div class="col-10">
-      <!-- Top Space -->
-      <div class="row topSpace"></div>
-      <!-- second main column first row -->
-      <div class="row my-3">
-        <div class="col-3">
-          <div class="btn-group w-100">
-            <select
-              class="form-select hvr-grow-rotate"
-              aria-label="Default select example"
-              v-model="score"
-            >
-              <option disabled value="" class="hvr-grow-rotate" selected>Select Quiz Points</option>
-              <option>0</option>
-              <option>5</option>
-              <option>10</option>
-              <option>15</option>
-              <option>20</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="w-100"></div>
-        </div>
-        <div class="col-3">
-          <div
-            class="w-100 btn btn-danger hvr-wobble-bottom"
-            @click="router.push({ name: 'update-quiz', params: { quiz_id: route.params.quiz_id } })"
-          >
-            Cancel
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="w-100 btn btn-success hvr-wobble-bottom" @click="updateQuiz">Update</div>
-        </div>
-      </div>
-
       <!-- second main column second row -->
-      <div row="row mt-3">
-        <div class="col-12">
-          <textarea
-            v-model="content"
-            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-            class="rounded align-center text-center noBorder bigTextbox w-100 px-3 py-5"
-            placeholder="Insert your Question here"
-          ></textarea>
-        </div>
-      </div>
 
       <!-- second main column third row -->
 
       <div class="row">
-        <div class="col-12 d-flex">
-          <div class="w-25 p-2 questionBox1 rounded m-2">
-            <label class="switch w-100 mb-3">
-              <input type="checkbox" v-model="choice_a.isCorrect" />
-              <span class="slider rounded"></span>
-            </label>
-            <textarea
-              name="text"
-              v-model="choice_a.content"
-              oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-              class="rounded text-center noBorder w-100 questionBoxColor1"
-              placeholder="Insert answer"
-            ></textarea>
+        <div class="d-flex flex flex-col gap-2">
+          <!-- q1 -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body flex flex-row">
+              <label class="switch w-100 mb-3">
+                <input type="checkbox" v-model="choice_a.isCorrect" />
+                <span class="slider rounded"></span>
+              </label>
+              <textarea
+                name="text"
+                v-model="choice_a.content"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                class="w-full bg-base-200"
+                placeholder="Insert answer"
+              ></textarea>
+            </div>
           </div>
-          <div class="w-25 p-2 questionBox2 rounded m-2">
-            <label class="switch w-100 mb-3">
-              <input type="checkbox" v-model="choice_b.isCorrect" />
-              <span class="slider rounded"></span>
-            </label>
-            <textarea
-              name="text"
-              v-model="choice_b.content"
-              oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-              class="rounded text-center noBorder w-100 questionBoxColor2"
-              placeholder="Insert answer"
-            ></textarea>
+          <!-- q2 -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body flex flex-row">
+              <label class="switch w-100 mb-3">
+                <input type="checkbox" v-model="choice_b.isCorrect" />
+                <span class="slider rounded"></span>
+              </label>
+              <textarea
+                name="text"
+                v-model="choice_a.content"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                class="w-full bg-base-200"
+                placeholder="Insert answer"
+              ></textarea>
+            </div>
           </div>
-          <div class="w-25 p-2 questionBox3 rounded m-2">
-            <label class="switch w-100 mb-3">
-              <input type="checkbox" v-model="choice_c.isCorrect" />
-              <span class="slider rounded"></span>
-            </label>
-            <textarea
-              name="text"
-              v-model="choice_c.content"
-              oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-              class="rounded text-center noBorder w-100 questionBoxColor3"
-              placeholder="Insert answer"
-            ></textarea>
+          <!-- q3 -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body flex flex-row">
+              <label class="switch w-100 mb-3">
+                <input type="checkbox" v-model="choice_c.isCorrect" />
+                <span class="slider rounded"></span>
+              </label>
+              <textarea
+                name="text"
+                v-model="choice_a.content"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                class="w-full bg-base-200"
+                placeholder="Insert answer"
+              ></textarea>
+            </div>
           </div>
-          <div class="w-25 p-2 questionBox4 rounded m-2">
-            
-            <label class="switch w-100 mb-3">
-              
-              <input type="checkbox" v-model="choice_d.isCorrect" />
-              <span class="slider rounded"></span>
-            </label>
-            <textarea
-              name="text"
-              v-model="choice_d.content"
-              oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-              class="rounded text-center questionBoxColor4 noBorder w-100"
-              placeholder="Insert answer"
-            ></textarea>
+          <!-- q4 -->
+          <div class="card w-full bg-base-100 shadow-xl">
+            <div class="card-body flex flex-row">
+              <label class="switch w-100 mb-3">
+                <input type="checkbox" v-model="choice_d.isCorrect" />
+                <span class="slider rounded"></span>
+              </label>
+              <textarea
+                name="text"
+                v-model="choice_a.content"
+                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                class="w-full bg-base-200"
+                placeholder="Insert answer"
+              ></textarea>
+            </div>
           </div>
+          <!-- end -->
         </div>
       </div>
     </div>
@@ -268,7 +272,7 @@ onMounted(() => {
 .hvr-grow-rotate:active {
   -webkit-transform: scale(1.1) rotate(4deg);
   transform: scale(1.1) rotate(4deg);
-  background-color: blue;
+  /* background-color: blue; */
   color: white;
   border-radius: 10px;
 }
@@ -401,42 +405,34 @@ textarea {
 
 .questionBox1 {
   font-size: 20px !important;
-  background-color: #7e549e !important;
   color: white !important;
 }
 
 .questionBox2 {
   font-size: 20px !important;
-  background-color: #c2549d !important;
   color: white !important;
 }
 
 .questionBox3 {
   font-size: 20px !important;
-  background-color: #fc8370 !important;
   color: white !important;
 }
 
 .questionBox4 {
   font-size: 20px !important;
-  background-color: #fecb3e !important;
   color: white !important;
 }
 
 .questionBoxColor1 {
-  background-color: #7e549e !important;
 }
 
 .questionBoxColor2 {
-  background-color: #c2549d !important;
 }
 
 .questionBoxColor3 {
-  background-color: #fc8370 !important;
 }
 
 .questionBoxColor4 {
-  background-color: #fecb3e !important;
 }
 
 .bt1 {

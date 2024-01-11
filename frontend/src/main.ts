@@ -17,7 +17,8 @@ import router from './router'
 
 import axios from 'axios'
 
-import './assets/main.css'
+// import './assets/main.css'
+import './index.css'
 
 // axios.defaults.baseURL = 'http://127.0.0.1:8080/api'
 // axios.defaults.baseURL = 'http://192.168.18.185:8080/api'
