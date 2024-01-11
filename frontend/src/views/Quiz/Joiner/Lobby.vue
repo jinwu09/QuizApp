@@ -71,7 +71,9 @@ socket.on('password', (res: IPassword) => {
     icon: 'info',
     text: res.msg,
     input: 'password',
-    showCancelButton: true
+    showCancelButton: true,
+    showConfirmButton: true,
+    timer: 10000
   }).then((result) => {
     console.log(result)
     if (result.isConfirmed) {
