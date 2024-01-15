@@ -23,7 +23,7 @@ function navToRegister() {
         <button class="btn btn-primary w-2/3" @click="navToRegister">Get Started</button>
         <div class="flex gap-5 justify-center">
           <p class="h-full my-auto">Already have an Account</p>
-          <a class="underline text-primary" @click="navToRegister">Login</a>
+          <a class="underline text-primary" @click="navToLogin">Login</a>
         </div>
       </div>
     </div>
