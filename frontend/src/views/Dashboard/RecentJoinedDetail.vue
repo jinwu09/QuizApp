@@ -53,7 +53,7 @@ onMounted(() => {
         <h1>{{ feedback.title }}</h1>
       </div>
       <div v-for="item in feedback.question" :key="item.id">
-        <div class="card w-full bg-base-100 shadow-xl">
+        <div class="card w-full bg-neutral shadow-xl">
           <div class="card-body">
             <h2 class="card-title">Question: {{ item.content }}</h2>
             <p>Choices:</p>
@@ -63,6 +63,7 @@ onMounted(() => {
               </p>
             </div>
             <div v-for="answer in item.answer" :key="answer.id">
+              {{ answer }}
               <p :class="answer.choice.is_correct ? 'text-green-400' : 'text-red-500'">
                 Your Answer "{{ answer.choice.content }}" is
                 {{ answer.choice.is_correct ? 'Right' : 'Wrong' }}

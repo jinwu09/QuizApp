@@ -44,15 +44,22 @@ onMounted(() => {
 
 <template>
   <NavBar />
-  <div class="container-fluid">
-    <div class="row mt-2">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-        <h1 class="mt-2">Leaderboards:</h1>
+  <div class="flex justify-center">
+    <div class="container flex flex-col">
+      <div class="flex flex-col gap-10">
+        <div class="card w-full bg-base-300 shadow-xl">
+          <div class="card-body text-center">
+            <h1 class="text-2xl">Leaderboards:</h1>
+          </div>
+        </div>
         <div v-for="user in UserList" :key="user.id">
-          <div class="line">
-            <h5>{{ user.first_name }} {{ user.last_name }}</h5>
-            <h5>{{ user.score }} / {{ TotalScore }}</h5>
+          <div class="flex justify-between">
+            <div class="card w-full bg-neutral shadow-xl">
+              <div class="card-body flex-row justify-between">
+                <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+                <h5>{{ user.score }} / {{ TotalScore }}</h5>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -66,27 +73,3 @@ onMounted(() => {
     </div>
   </div> -->
 </template>
-
-<style scoped>
-.line {
-  border-top: 2px var(--main-color) solid;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  padding: 2%;
-}
-
-.line:hover {
-  background-color: var(--main-color);
-  color: white;
-  transform: scale(1.1);
-  transition: 0.1s ease-in-out;
-}
-
-@media only screen and (max-width: 768px) {
-  .line:hover {
-    transform: unset;
-  }
-}
-</style>

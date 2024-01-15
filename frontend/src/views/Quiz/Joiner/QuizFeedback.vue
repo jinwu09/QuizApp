@@ -56,6 +56,37 @@ onMounted(() => {
 
 <template>
   <NavBar />
+
+  <div class="flex justify-center">
+    <div class="container flex flex-col gap-3">
+      <div class="flex justify-center">
+        <h1>{{ feedback?.title }}</h1>
+      </div>
+      <div v-for="item in feedback?.question" :key="item.id">
+        <div class="card w-full bg-neutral shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Question: {{ item.content }}</h2>
+            <p>Choices:</p>
+            <div v-for="choice in item.choice" :key="choice.id" class="col-md-6">
+              <p :class="choice.is_correct ? 'text-green-400' : 'text-red-500'">
+                {{ choice.content }}
+              </p>
+            </div>
+            <div v-for="answer in item.answer" :key="answer.id">
+              <p :class="answer.choice.is_correct ? 'text-green-400' : 'text-red-500'">
+                Your Answer "{{ answer.choice.content }}" is
+                {{ answer.choice.is_correct ? 'Right' : 'Wrong' }}
+              </p>
+            </div>
+            <div class="card-actions justify-end">
+              <!-- <button class="btn btn-primary">Buy Now</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="mt-4">
     <div class="container-fluid">
       <div class="row">
@@ -64,9 +95,7 @@ onMounted(() => {
       <div v-for="item in feedback?.question" :key="item.id" class="bounder my-1">
         <div class="row pt-3">
           <div class="container-fluid p-4">
-            <div>
-              Question: {{ item.content }}
-            </div>
+            <div>Question: {{ item.content }}</div>
           </div>
         </div>
         <div class="row">
@@ -81,7 +110,9 @@ onMounted(() => {
             <div class="row">
               <p>Choices:</p>
               <div v-for="choice in item.choice" :key="choice.id" class="col-md-6">
-                <p :class="choice.is_correct ? 'text-center green' : 'text-center red'">{{ choice.content }}</p>
+                <p :class="choice.is_correct ? 'text-center green' : 'text-center red'">
+                  {{ choice.content }}
+                </p>
               </div>
             </div>
           </div>
@@ -95,7 +126,11 @@ onMounted(() => {
         </div>
         <div class="row">
           <div v-for="answer in item.answer" :key="answer.id">
-            <p :class="answer.choice.is_correct ? 'green':'red'">Your Answer {{ answer.choice.content }} is {{ answer.choice.is_correct ? "Right" : "Wrong"}}</p>
+            {{ answer }}
+            <p :class="answer.choice.is_correct ? 'green' : 'red'">
+              Your Answer {{ answer.choice.content }} is
+              {{ answer.choice.is_correct ? 'Right' : 'Wrong' }}
+            </p>
           </div>
         </div>
       </div>
@@ -112,7 +147,7 @@ onMounted(() => {
   color: red;
 }
 
-.bounder{
+.bounder {
   border: 3px solid var(--main-color);
   padding: 25px;
 }

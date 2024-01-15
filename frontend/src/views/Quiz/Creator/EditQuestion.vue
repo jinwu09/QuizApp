@@ -79,7 +79,7 @@ function updateQuiz() {
     .then((res) => {
       SwalDesign.fire({
         icon: 'success',
-        title: res.data.message
+        title: res.data.payload.message
       })
 
       router.push({ name: 'update-quiz', params: { quiz_id: route.params.quiz_id } })
@@ -87,9 +87,6 @@ function updateQuiz() {
     .catch((err) => {
       console.log(err)
     })
-}
-function test() {
-  console.log('test')
 }
 onMounted(() => {
   axios
@@ -124,378 +121,152 @@ onMounted(() => {
 
 <template>
   <NavBar />
-  <div class="container-fluid flex flex-col gap-3">
-    <div class="card w-full bg-base-100 shadow-xl">
-      <div class="card-body">
-        <div class="flex justify-between">
-          <select
-            class="form-select hvr-grow-rotate"
-            aria-label="Default select example"
-            v-model="score"
-          >
-            <option disabled value="" class="hvr-grow-rotate" selected>Select Quiz Points</option>
-            <option>0</option>
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
-            <option>20</option>
-          </select>
-          <div>
-            <!--  -->
-            <button
-              class="btn btn-neutral"
-              @click="
-                router.push({ name: 'update-quiz', params: { quiz_id: route.params.quiz_id } })
-              "
+  <div class="flex justify-center">
+    <div class="flex container flex-col gap-6">
+      <div class="card w-full bg-base-100 shadow-xl">
+        <div class="card-body">
+          <div class="flex justify-between">
+            <select
+              class="form-select hvr-grow-rotate"
+              aria-label="Default select example"
+              v-model="score"
             >
-              Cancel
-            </button>
-            <button class="btn btn-primary" @click="updateQuiz">Update</button>
+              <option disabled value="" class="" selected>Select Quiz Points</option>
+              <option>0</option>
+              <option>5</option>
+              <option>10</option>
+              <option>15</option>
+              <option>20</option>
+            </select>
+            <div>
+              <!--  -->
+              <button
+                class="btn btn-neutral"
+                @click="
+                  router.push({ name: 'update-quiz', params: { quiz_id: route.params.quiz_id } })
+                "
+              >
+                Cancel
+              </button>
+              <button class="btn btn-primary" @click="updateQuiz">Update</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="card w-full bg-base-100 shadow-xl">
-      <div class="card-body">
-        <textarea
-          v-model="content"
-          oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-          class="w-full bg-base-200 align-center text-center border-none bigTextbox w-100 px-3 py-5"
-          placeholder="Insert your Question here"
-        ></textarea>
-      </div>
-    </div>
-
-    <!-- second main column -->
-    <div class="col-10">
-      <!-- second main column second row -->
-
-      <!-- second main column third row -->
-
-      <div class="row">
-        <div class="d-flex flex flex-col gap-2">
-          <!-- q1 -->
-          <div class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body flex flex-row">
-              <label class="switch w-100 mb-3">
-                <input type="checkbox" v-model="choice_a.isCorrect" />
-                <span class="slider rounded"></span>
-              </label>
-              <textarea
-                name="text"
-                v-model="choice_a.content"
-                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-                class="w-full bg-base-200"
-                placeholder="Insert answer"
-              ></textarea>
-            </div>
-          </div>
-          <!-- q2 -->
-          <div class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body flex flex-row">
-              <label class="switch w-100 mb-3">
-                <input type="checkbox" v-model="choice_b.isCorrect" />
-                <span class="slider rounded"></span>
-              </label>
-              <textarea
-                name="text"
-                v-model="choice_a.content"
-                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-                class="w-full bg-base-200"
-                placeholder="Insert answer"
-              ></textarea>
-            </div>
-          </div>
-          <!-- q3 -->
-          <div class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body flex flex-row">
-              <label class="switch w-100 mb-3">
-                <input type="checkbox" v-model="choice_c.isCorrect" />
-                <span class="slider rounded"></span>
-              </label>
-              <textarea
-                name="text"
-                v-model="choice_a.content"
-                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-                class="w-full bg-base-200"
-                placeholder="Insert answer"
-              ></textarea>
-            </div>
-          </div>
-          <!-- q4 -->
-          <div class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body flex flex-row">
-              <label class="switch w-100 mb-3">
-                <input type="checkbox" v-model="choice_d.isCorrect" />
-                <span class="slider rounded"></span>
-              </label>
-              <textarea
-                name="text"
-                v-model="choice_a.content"
-                oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-                class="w-full bg-base-200"
-                placeholder="Insert answer"
-              ></textarea>
-            </div>
-          </div>
-          <!-- end -->
+      <div class="card w-full bg-base-100 shadow-xl">
+        <div class="flex justify-center">
+          <p>Question</p>
+        </div>
+        <div class="card-body">
+          <textarea
+            v-model="content"
+            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+            class="w-full bg-base-200 align-center text-center border-none bigTextbox w-100 px-3 py-5"
+            placeholder="Insert your Question here"
+          ></textarea>
         </div>
       </div>
-    </div>
 
-    <!-- third main column -->
-    <div class="col-1"></div>
+      <!-- second main column -->
+      <div class="col-10">
+        <!-- second main column second row -->
+
+        <!-- second main column third row -->
+
+        <div class="row">
+          <div class="d-flex flex flex-col gap-2">
+            <!-- q1 -->
+            <div class="card w-full bg-base-100 shadow-xl">
+              <div class="card-body flex flex-row gap-7">
+                <div class="form-control">
+                  <label class="cursor-pointer label h-full">
+                    <input
+                      type="checkbox"
+                      class="checkbox checkbox-success"
+                      v-model="choice_a.isCorrect"
+                    />
+                  </label>
+                </div>
+                <textarea
+                  name="text"
+                  v-model="choice_a.content"
+                  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                  class="w-full bg-base-200"
+                  placeholder="Insert answer"
+                ></textarea>
+              </div>
+            </div>
+            <!-- q2 -->
+            <div class="card w-full bg-base-100 shadow-xl">
+              <div class="card-body flex flex-row gap-7">
+                <div class="form-control">
+                  <label class="cursor-pointer label h-full">
+                    <input
+                      type="checkbox"
+                      class="checkbox checkbox-success"
+                      v-model="choice_b.isCorrect"
+                    />
+                  </label>
+                </div>
+                <textarea
+                  name="text"
+                  v-model="choice_b.content"
+                  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                  class="w-full bg-base-200"
+                  placeholder="Insert answer"
+                ></textarea>
+              </div>
+            </div>
+            <!-- q3 -->
+            <div class="card w-full bg-base-100 shadow-xl">
+              <div class="card-body flex flex-row gap-7">
+                <div class="form-control">
+                  <label class="cursor-pointer label h-full">
+                    <input
+                      type="checkbox"
+                      class="checkbox checkbox-success"
+                      v-model="choice_c.isCorrect"
+                    />
+                  </label>
+                </div>
+                <textarea
+                  name="text"
+                  v-model="choice_c.content"
+                  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                  class="w-full bg-base-200"
+                  placeholder="Insert answer"
+                ></textarea>
+              </div>
+            </div>
+            <!-- q4 -->
+            <div class="card w-full bg-base-100 shadow-xl">
+              <div class="card-body flex flex-row gap-7">
+                <div class="form-control">
+                  <label class="cursor-pointer label h-full">
+                    <input
+                      type="checkbox"
+                      class="checkbox checkbox-success"
+                      v-model="choice_d.isCorrect"
+                    />
+                  </label>
+                </div>
+                <textarea
+                  name="text"
+                  v-model="choice_d.content"
+                  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+                  class="w-full bg-base-200"
+                  placeholder="Insert answer"
+                ></textarea>
+              </div>
+            </div>
+            <!-- end -->
+          </div>
+        </div>
+      </div>
+
+      <!-- third main column -->
+      <div class="col-1"></div>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.topSpace {
-  margin: 2% !important;
-}
-
-/* Dropdown */
-.hvr-grow-rotate {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-}
-
-.hvr-grow-rotate:hover,
-.hvr-grow-rotate:focus,
-.hvr-grow-rotate:active {
-  -webkit-transform: scale(1.1) rotate(4deg);
-  transform: scale(1.1) rotate(4deg);
-  /* background-color: blue; */
-  color: white;
-  border-radius: 10px;
-}
-
-textarea {
-  color: white;
-}
-
-@-webkit-keyframes hvr-pulse-grow {
-  to {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
-}
-
-@keyframes hvr-pulse-grow {
-  to {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-  }
-}
-
-/* Cancel and Save */
-@-webkit-keyframes hvr-wobble-bottom {
-  16.65% {
-    -webkit-transform: skew(-12deg);
-    transform: skew(-12deg);
-  }
-
-  33.3% {
-    -webkit-transform: skew(10deg);
-    transform: skew(10deg);
-  }
-
-  49.95% {
-    -webkit-transform: skew(-6deg);
-    transform: skew(-6deg);
-  }
-
-  66.6% {
-    -webkit-transform: skew(4deg);
-    transform: skew(4deg);
-  }
-
-  83.25% {
-    -webkit-transform: skew(-2deg);
-    transform: skew(-2deg);
-  }
-
-  100% {
-    -webkit-transform: skew(0);
-    transform: skew(0);
-  }
-}
-
-@keyframes hvr-wobble-bottom {
-  16.65% {
-    -webkit-transform: skew(-12deg);
-    transform: skew(-12deg);
-  }
-
-  33.3% {
-    -webkit-transform: skew(10deg);
-    transform: skew(10deg);
-  }
-
-  49.95% {
-    -webkit-transform: skew(-6deg);
-    transform: skew(-6deg);
-  }
-
-  66.6% {
-    -webkit-transform: skew(4deg);
-    transform: skew(4deg);
-  }
-
-  83.25% {
-    -webkit-transform: skew(-2deg);
-    transform: skew(-2deg);
-  }
-
-  100% {
-    -webkit-transform: skew(0);
-    transform: skew(0);
-  }
-}
-
-.hvr-wobble-bottom {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transform-origin: 100% 0;
-  transform-origin: 100% 0;
-}
-
-.hvr-wobble-bottom:hover,
-.hvr-wobble-bottom:focus,
-.hvr-wobble-bottom:active {
-  -webkit-animation-name: hvr-wobble-bottom;
-  animation-name: hvr-wobble-bottom;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-timing-function: ease-in-out;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
-}
-
-.noBorder {
-  border: none !important;
-  outline: none !important;
-  border-style: none !important;
-  border-color: Transparent !important;
-  background-color: var(--main-color) !important;
-}
-
-::placeholder {
-  text-align: center !important;
-  color: rgb(199, 198, 198) !important;
-}
-
-.bigTextbox {
-  font-size: 30px !important;
-  color: white !important;
-  /* background-color: #dfdcdc !important; */
-  border: 2px solid black;
-}
-
-.questionBox1 {
-  font-size: 20px !important;
-  color: white !important;
-}
-
-.questionBox2 {
-  font-size: 20px !important;
-  color: white !important;
-}
-
-.questionBox3 {
-  font-size: 20px !important;
-  color: white !important;
-}
-
-.questionBox4 {
-  font-size: 20px !important;
-  color: white !important;
-}
-
-.questionBoxColor1 {
-}
-
-.questionBoxColor2 {
-}
-
-.questionBoxColor3 {
-}
-
-.questionBoxColor4 {
-}
-
-.bt1 {
-  padding: 10px !important;
-  margin: 10x !important;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: red;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  color: white;
-  height: 26px;
-  width: 100px;
-  left: 80px;
-  bottom: 4px;
-  background-color: None;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  content: 'Correct';
-  background-color: green !important;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.slider:hover {
-  color: #fdec6e;
-  text-shadow: 0px 0px 30px #fdec6e;
-  -moz-transition: all 0.2s ease-in;
-  -o-transition: all 0.2s ease-in;
-  -webkit-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-}
-</style>

@@ -60,8 +60,8 @@ onBeforeUnmount(() => {
 <template>
   <main>
     <div v-if="!has_submitted">
-      <div class="flex justify-center">
-        <div class="container flex flex-col gap-4">
+      <div class="flex justify-center h-[100vh]">
+        <div class="container flex flex-col gap-4 m-auto">
           <div class="card w-full bg-base-100 shadow-xl">
             <div class="card-body">
               <h2 class="card-title">{{ Choies[0].content }}</h2>
@@ -102,15 +102,15 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <div v-else>
-      <div class="container-fluid">
-        <div class="row">
+      <div class="flex justify-center h-[100vh]">
+        <div class="flex container m-auto">
           <div class="col-md-12 d-flex align-items-center justify-content-center vh-100">
             <div>
               <div class="row d-flex align-items-center justify-content-center">
                 <span class="loader"></span>
               </div>
-              <div class="row pt-5">
-                <p class="text-center text">{{ get_motivational_quotes() }}</p>
+              <div class="center">
+                <p class="text-center text-white">{{ get_motivational_quotes() }}</p>
               </div>
             </div>
           </div>

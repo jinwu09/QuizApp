@@ -25,7 +25,12 @@ function logOut() {
 
       router.push({ name: 'LandingPage' })
     })
-    .catch((err) => {
+    .catch((err: any) => {
+      if (err?.response?.data?.payload?.message == null) {
+        store.removeTokenValue()
+        router.push({ name: 'login' })
+        return
+      }
       SwalDesign.fire({
         icon: 'error',
         title: err.response.data.payload.message
