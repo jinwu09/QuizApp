@@ -20,7 +20,8 @@ export const io = new Server(httpServer, {
     origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
-    allowedHeaders: ["my-custom-header"],
+    allowedHeaders: ["*"],
+    // allowedHeaders: ["my-custom-header"],
   },
 });
 
