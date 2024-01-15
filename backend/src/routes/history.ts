@@ -117,6 +117,9 @@ router.get(
                 score: true,
                 choice: true,
                 answer: {
+                  where: {
+                    usersId: res.locals.userId,
+                  },
                   select: {
                     id: true,
                     choice: {

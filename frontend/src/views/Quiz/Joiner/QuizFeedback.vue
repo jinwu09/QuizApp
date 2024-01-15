@@ -66,12 +66,14 @@ onMounted(() => {
         <div class="card w-full bg-neutral shadow-xl">
           <div class="card-body">
             <h2 class="card-title">Question: {{ item.content }}</h2>
+            <hr />
             <p>Choices:</p>
             <div v-for="choice in item.choice" :key="choice.id" class="col-md-6">
               <p :class="choice.is_correct ? 'text-green-400' : 'text-red-500'">
                 {{ choice.content }}
               </p>
             </div>
+            <hr />
             <div v-for="answer in item.answer" :key="answer.id">
               <p :class="answer.choice.is_correct ? 'text-green-400' : 'text-red-500'">
                 Your Answer "{{ answer.choice.content }}" is
@@ -86,69 +88,4 @@ onMounted(() => {
       </div>
     </div>
   </div>
-
-  <div class="mt-4">
-    <div class="container-fluid">
-      <div class="row">
-        <h1 class="text-center">{{ feedback?.title }}</h1>
-      </div>
-      <div v-for="item in feedback?.question" :key="item.id" class="bounder my-1">
-        <div class="row pt-3">
-          <div class="container-fluid p-4">
-            <div>Question: {{ item.content }}</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="container-fluid">
-            <div>
-              <hr />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="container-fluid">
-            <div class="row">
-              <p>Choices:</p>
-              <div v-for="choice in item.choice" :key="choice.id" class="col-md-6">
-                <p :class="choice.is_correct ? 'text-center green' : 'text-center red'">
-                  {{ choice.content }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="container-fluid">
-            <div>
-              <hr />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div v-for="answer in item.answer" :key="answer.id">
-            {{ answer }}
-            <p :class="answer.choice.is_correct ? 'green' : 'red'">
-              Your Answer {{ answer.choice.content }} is
-              {{ answer.choice.is_correct ? 'Right' : 'Wrong' }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
-
-<style scoped>
-.green {
-  color: green;
-}
-
-.red {
-  color: red;
-}
-
-.bounder {
-  border: 3px solid var(--main-color);
-  padding: 25px;
-}
-</style>

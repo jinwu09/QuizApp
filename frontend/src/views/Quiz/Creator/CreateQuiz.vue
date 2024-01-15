@@ -60,11 +60,11 @@ function createQuiz() {
 
   <div class="flex justify-center">
     <div class="flex container justify-center">
-      <form class="card w-full bg-base-100 shadow-xl" @submit.prevent="createQuiz">
+      <form class="card w-96 bg-base-100 shadow-xl" @submit.prevent="createQuiz">
         <div class="card-body">
-          <h2 class="card-title">Create You Quiz:</h2>
+          <h2 class="card-title">Create Your Quiz:</h2>
           <!-- input start here -->
-          <label class="form-control w-full max-w-xs">
+          <label class="form-control w-full max-w-xs mx-auto">
             <div class="label">
               <span class="label-text">Title</span>
             </div>
@@ -77,7 +77,7 @@ function createQuiz() {
               required
             />
           </label>
-          <label class="form-control w-full max-w-xs">
+          <label class="form-control w-full max-w-xs mx-auto">
             <div class="label">
               <span class="label-text">Room Number</span>
             </div>
@@ -90,7 +90,7 @@ function createQuiz() {
               required
             />
           </label>
-          <div class="">
+          <div class="text-center">
             <div class="">
               <label class="">Room Status <span class=""></span></label>
               <select
@@ -104,7 +104,7 @@ function createQuiz() {
               </select>
             </div>
           </div>
-          <label class="form-control w-full max-w-xs">
+          <label class="form-control w-full max-w-xs mx-auto">
             <div class="label">
               <span class="label-text">Room Password</span>
             </div>
@@ -118,7 +118,7 @@ function createQuiz() {
               :required="status == 'PRIVATE'"
             />
           </label>
-          <div class="mb-3">
+          <div class="max-w-xs mx-auto w-full">
             <label class="form-label">Description <span class="text-muted"></span></label>
             <textarea
               type="text"

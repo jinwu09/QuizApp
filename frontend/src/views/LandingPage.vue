@@ -5,9 +5,29 @@ const router = useRouter()
 function navToLogin() {
   router.push({ name: 'login' })
 }
+function navToRegister() {
+  router.push({ name: 'register' })
+}
 </script>
 
 <template>
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">QuizApp</h1>
+        <p class="py-6">
+          Transform your content into an immersive experience with our cutting-edge real-time
+          interactive quiz creation platform. Engage your audience like never before and elevate
+          your content to new heights.
+        </p>
+        <button class="btn btn-primary w-2/3" @click="navToRegister">Get Started</button>
+        <div class="flex gap-5 justify-center">
+          <p class="h-full my-auto">Already have an Account</p>
+          <a class="underline text-primary" @click="navToRegister">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div
     class="container-fluid page-background d-flex justify-content-center align-items-center align-contents-center pt-4"
   >

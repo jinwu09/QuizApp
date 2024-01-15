@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
             <div class="card-body">
               <h2 class="card-title">{{ Choies[0].content }}</h2>
               <div class="card-actions justify-end">
-                <button class="btn btn-primary" @click="submit(Choies[0].id)">Answer</button>
+                <button class="btn btn-primary" @click.once="submit(Choies[0].id)">Answer</button>
               </div>
             </div>
           </div>

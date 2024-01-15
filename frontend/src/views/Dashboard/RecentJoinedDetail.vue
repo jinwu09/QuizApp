@@ -21,6 +21,7 @@ onMounted(() => {
     .then((res: any) => {
       // console.log(quizzes.value)
       feedback.value = res.data.payload[0]
+      console.log(res.data.payload[0])
     })
     .catch((err) => {
       // console.log(err)
@@ -56,14 +57,15 @@ onMounted(() => {
         <div class="card w-full bg-neutral shadow-xl">
           <div class="card-body">
             <h2 class="card-title">Question: {{ item.content }}</h2>
+            <hr />
             <p>Choices:</p>
             <div v-for="choice in item.choice" :key="choice.id" class="col-md-6">
               <p :class="choice.is_correct ? 'text-green-400' : 'text-red-500'">
                 {{ choice.content }}
               </p>
             </div>
+            <hr />
             <div v-for="answer in item.answer" :key="answer.id">
-              {{ answer }}
               <p :class="answer.choice.is_correct ? 'text-green-400' : 'text-red-500'">
                 Your Answer "{{ answer.choice.content }}" is
                 {{ answer.choice.is_correct ? 'Right' : 'Wrong' }}

@@ -78,8 +78,8 @@ onBeforeUnmount(() => {
 
 <template>
   <NavBar />
-  <div class="mt-2">
-    <div class="container-fluid">
+  <div class="flex justify-center">
+    <div class="container flex justify-center">
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-10" v-if="!isExist">
@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
           <div class="row">
             <h1>In Lobby:</h1>
           </div>
-          <div class="row">
+          <div class="flex flex-wrap gap-3">
             <div v-for="user in joiners" :key="user.User.id" class="col-md-3 pt-2">
               <LobbyJoiner
                 :id="user.User.id"
